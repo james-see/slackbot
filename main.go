@@ -115,7 +115,10 @@ func main() {
 	}
 	defer db.Close()
 	// Check init db first
-	executeSQLFile(db, "sql/init-db.sql")
+	err = executeSQLFile(db, "sql/init-db.sql")
+	if err != nil {
+		fmt.Println(err)
+	}
 	// Query the database
 	records, err := getPendingRecords(db)
 	if err != nil {
